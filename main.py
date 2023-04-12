@@ -3,6 +3,8 @@ import time
 
 list_of_cats = ['Мэри Шелли', 'Фламбуша', 'Петра', 'Родезия', 'Цукерка', 'Арракис', 'Комбат']
 
+mist = 0
+
 
 def happy_cat():
     happy_cat_today = random.choice(list_of_cats)
@@ -11,6 +13,7 @@ def happy_cat():
 
 
 def choice_action():
+    global mist
     feed_cat = input('Хотите угостить кота? --> (да/нет)  ')
 
 
@@ -22,8 +25,15 @@ def choice_action():
         print('Ах вы жадина!!!')
         choice_action()
     else:
-        print('До свидания')
-        time.sleep(1)
+        if mist != 2:
+            print('Кажется, мы вас не понимаем. Отвечайте "Да" или "Нет".')
+            mist += 1
+            choice_action()
+        if mist == 2:
+            print('Какой-то вы неадекватный')
+            print('До свидания')
+            time.sleep(1)
+            mist = 0
 
 
 choice_action()
